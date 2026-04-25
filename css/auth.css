@@ -1,0 +1,359 @@
+/* ═══════════════════════════════════════════
+   AcademiaHub - Authentication Styles
+   ═══════════════════════════════════════════ */
+
+:root {
+    --primary: #2563EB;
+    --primary-dark: #1D4ED8;
+    --primary-light: #60A5FA;
+    --secondary: #7C3AED;
+    --accent: #F59E0B;
+    --success: #10B981;
+    --danger: #EF4444;
+    --dark: #0F172A;
+    --gray-800: #1E293B;
+    --gray-700: #334155;
+    --gray-500: #64748B;
+    --gray-300: #CBD5E1;
+    --gray-100: #F1F5F9;
+    --white: #FFFFFF;
+    --radius: 16px;
+    --radius-sm: 10px;
+    --shadow-xl: 0 25px 60px rgba(0,0,0,0.12);
+    --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+    --font-main: 'Cairo', 'Tajawal', sans-serif;
+    --font-display: 'El Messiri', 'Cairo', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: var(--font-main);
+    direction: rtl;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--dark);
+    overflow-x: hidden;
+}
+
+/* ════ خلفية متحركة ════ */
+.auth-background {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+}
+.bg-shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+    animation: floatShape 15s ease-in-out infinite;
+}
+.shape-1 {
+    width: 500px; height: 500px;
+    background: var(--primary);
+    top: -150px; right: -150px;
+    animation-delay: 0s;
+}
+.shape-2 {
+    width: 400px; height: 400px;
+    background: var(--secondary);
+    bottom: -100px; left: -100px;
+    animation-delay: -5s;
+}
+.shape-3 {
+    width: 300px; height: 300px;
+    background: var(--accent);
+    top: 50%; left: 30%;
+    animation-delay: -10s;
+}
+.shape-4 {
+    width: 250px; height: 250px;
+    background: var(--success);
+    bottom: 30%; right: 20%;
+    animation-delay: -7s;
+}
+@keyframes floatShape {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(40px, -50px) scale(1.1); }
+    50% { transform: translate(-20px, 30px) scale(0.9); }
+    75% { transform: translate(-50px, -20px) scale(1.05); }
+}
+.bg-particles { position: absolute; inset: 0; }
+
+/* ════ الحاوية الرئيسية ════ */
+.auth-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 580px;
+    padding: 20px;
+}
+
+/* ════ الشعار ════ */
+.auth-header { text-align: center; margin-bottom: 10px; }
+.auth-logo { display: inline-block; }
+.logo-animation {
+    position: relative;
+    width: 90px; height: 90px;
+    margin: 0 auto 10px;
+}
+.logo-cap, .logo-book, .logo-pen {
+    position: absolute;
+    font-size: 2.8rem;
+    animation: logoDance 3s ease-in-out infinite;
+}
+.logo-cap { 
+    color: var(--primary-light);
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 0s;
+}
+.logo-book { 
+    color: var(--accent);
+    bottom: 0; left: 10px;
+    animation-delay: -1s;
+}
+.logo-pen { 
+    color: var(--success);
+    bottom: 5px; right: 10px;
+    animation-delay: -2s;
+}
+@keyframes logoDance {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    25% { transform: translateY(-12px) rotate(-5deg); }
+    75% { transform: translateY(-6px) rotate(5deg); }
+}
+.logo-name {
+    font-family: var(--font-display);
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: -1px;
+}
+.logo-name span { color: var(--primary-light); }
+.logo-tagline {
+    color: var(--gray-300);
+    font-size: 1rem;
+    margin-top: -5px;
+    letter-spacing: 2px;
+}
+
+/* ════ شريط العبارات المتحرك ════ */
+.welcome-marquee {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 50px;
+    padding: 10px 0;
+    margin-bottom: 24px;
+    overflow: hidden;
+    position: relative;
+}
+.marquee-track {
+    display: flex;
+    gap: 16px;
+    animation: marqueeScroll 20s linear infinite;
+    white-space: nowrap;
+}
+.marquee-track span {
+    color: var(--white);
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.marquee-track span i { color: var(--accent); }
+.marquee-track .dot { color: var(--primary-light); font-weight: bold; }
+@keyframes marqueeScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* ════ بطاقة النموذج ════ */
+.auth-card {
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    box-shadow: var(--shadow-xl);
+}
+
+/* ════ أزرار التبديل ════ */
+.auth-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 28px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50px;
+    padding: 6px;
+}
+.auth-tab {
+    flex: 1;
+    padding: 14px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--gray-300);
+    transition: var(--transition);
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    font-family: var(--font-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.auth-tab.active {
+    background: var(--primary);
+    color: var(--white);
+    box-shadow: 0 10px 30px rgba(37,99,235,0.3);
+}
+
+/* ════ النماذج ════ */
+.auth-form {
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+}
+.auth-form.active { display: flex; }
+
+.form-row-dual {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-icon-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.form-icon-field > i {
+    position: absolute;
+    right: 16px;
+    color: var(--gray-500);
+    font-size: 1rem;
+    z-index: 1;
+    pointer-events: none;
+}
+.form-icon-field input,
+.form-icon-field select {
+    width: 100%;
+    padding: 14px 48px 14px 16px;
+    background: rgba(255,255,255,0.05);
+    border: 2px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius-sm);
+    color: var(--white);
+    font-size: 0.95rem;
+    font-family: var(--font-main);
+    transition: var(--transition);
+}
+.form-icon-field select { 
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: left 16px center;
+    cursor: pointer;
+}
+.form-icon-field select option {
+    background: var(--gray-800);
+    color: var(--white);
+}
+.form-icon-field input:focus,
+.form-icon-field select:focus {
+    outline: none;
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 4px rgba(96,165,250,0.1);
+}
+.form-icon-field input::placeholder { color: var(--gray-500); }
+.toggle-password {
+    position: absolute;
+    left: 12px;
+    background: none;
+    border: none;
+    color: var(--gray-500);
+    cursor: pointer;
+    z-index: 1;
+}
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+}
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--gray-300);
+    cursor: pointer;
+}
+.forgot-link { color: var(--primary-light); text-decoration: none; font-weight: 600; }
+.forgot-link:hover { text-decoration: underline; }
+.terms-agreement {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.8rem;
+    color: var(--gray-300);
+}
+.terms-agreement a { color: var(--primary-light); }
+.btn-auth {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: var(--font-main);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+.btn-auth:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(37,99,235,0.4);
+}
+.btn-auth:active { transform: translateY(0); }
+.auth-message {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 0.9rem;
+    min-height: 24px;
+}
+.auth-message.success { color: var(--success); }
+.auth-message.error { color: var(--danger); }
+
+/* ════ التذييل ════ */
+.auth-footer {
+    text-align: center;
+    margin-top: 20px;
+    color: var(--gray-500);
+    font-size: 0.85rem;
+}
+.auth-footer-links { margin-top: 6px; }
+.auth-footer-links a { color: var(--gray-300); text-decoration: none; }
+.auth-footer-links a:hover { color: var(--primary-light); }
+.auth-footer-links span { margin: 0 8px; color: var(--gray-500); }
+
+/* ════ Responsive ════ */
+@media (max-width: 600px) {
+    .auth-card { padding: 24px 18px; }
+    .form-row-dual { grid-template-columns: 1fr; }
+    .logo-name { font-size: 2rem; }
+    .auth-container { padding: 10px; }
+}
