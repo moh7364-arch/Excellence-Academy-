@@ -779,3 +779,31 @@
     .order-detailed-row { flex-wrap: wrap; gap: 10px; padding: 14px 16px; }
     .experts-search-bar { flex-direction: column; }
 }
+
+/* ═══════════════ Journals Logos Section ═══════════════ */
+.journals-logos {
+    transition: var(--transition);
+}
+.journals-logos:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+.journals-logos img {
+    transition: var(--transition-fast);
+}
+.journals-logos > div:hover img {
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .journals-logos {
+        justify-content: center;
+        gap: 10px;
+    }
+    .journals-logos > div {
+        padding: 6px 10px;
+    }
+    .journals-logos img {
+        height: 22px !important;
+    }
+}
