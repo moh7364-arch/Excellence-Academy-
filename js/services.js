@@ -1,16 +1,18 @@
 /* ═══════════════════════════════════════════
-   AcademiaHub - Services Logic
-   تحديث: جميع نماذج الخدمات موجودة
+   AcademiaHub - Services Logic v2
+   إصلاح: جميع دوال الحقن تعمل بشكل مستقل
    ═══════════════════════════════════════════ */
 
 // ── Initialize All Service Forms ──
 function initAllServiceForms() {
+    console.log('🔄 initAllServiceForms called');
     initThesisForm();
     initPublicationForm();
     injectTranslationForm();
     injectStatisticsForm();
     injectPlagiarismForm();
     injectGraduationForm();
+    console.log('✅ All services initialized');
 }
 
 // ═══════════════════════════════════════════
@@ -18,10 +20,13 @@ function initAllServiceForms() {
 // ═══════════════════════════════════════════
 function initThesisForm() {
     const form = document.getElementById('thesisForm');
-    if (!form) return;
+    if (!form) {
+        console.log('⚠️ thesisForm not found yet');
+        return;
+    }
 
     const specSelect = document.getElementById('thesisSpecialization');
-    if (specSelect) {
+    if (specSelect && typeof specializationsTree !== 'undefined') {
         specSelect.innerHTML = '<option value="">اختر التخصص الدقيق...</option>';
         Object.entries(specializationsTree).forEach(([key, spec]) => {
             const optgroup = document.createElement('optgroup');
@@ -89,8 +94,12 @@ function initPublicationForm() {
 //  3. خدمة الترجمة الأكاديمية
 // ═══════════════════════════════════════════
 function injectTranslationForm() {
+    console.log('🔄 injectTranslationForm running...');
     const page = document.getElementById('page-service-translation');
-    if (!page) return;
+    if (!page) {
+        console.log('⚠️ page-service-translation not found');
+        return;
+    }
 
     page.innerHTML = `
         <div class="service-page-header">
@@ -119,61 +128,49 @@ function injectTranslationForm() {
                     <label>نوع المحتوى <span class="req">*</span></label>
                     <select required>
                         <option value="">اختر نوع المحتوى...</option>
-                        <option value="paper">ورقة علمية (Research Paper)</option>
+                        <option value="paper">ورقة علمية</option>
                         <option value="thesis">رسالة ماجستير / دكتوراه</option>
-                        <option value="proposal">خطة بحث (Proposal)</option>
+                        <option value="proposal">خطة بحث</option>
                         <option value="report">تقرير أكاديمي</option>
-                        <option value="abstract">ملخص بحث فقط (Abstract)</option>
-                        <option value="chapter">فصل محدد من الرسالة</option>
-                        <option value="other">محتوى أكاديمي آخر</option>
+                        <option value="abstract">ملخص بحث فقط</option>
                     </select>
                 </div>
             </div>
             <div class="form-section-card">
-                <h4><span class="step-badge">2</span> مستوى الترجمة</h4>
+                <h4><span class="step-badge">2</span> مستوى الخدمة</h4>
                 <div class="field-group">
-                    <label>نوع الخدمة المطلوبة <span class="req">*</span></label>
+                    <label>نوع الخدمة <span class="req">*</span></label>
                     <select required>
-                        <option value="">اختر مستوى الخدمة...</option>
+                        <option value="">اختر...</option>
                         <option value="translation_only">ترجمة فقط</option>
                         <option value="translation_editing">ترجمة + تدقيق لغوي</option>
-                        <option value="translation_native">ترجمة + مراجعة متحدث أصلي (Native Speaker)</option>
-                        <option value="editing_only">تدقيق لغوي فقط (لدي ترجمة جاهزة)</option>
+                        <option value="translation_native">ترجمة + مراجعة Native Speaker</option>
+                        <option value="editing_only">تدقيق لغوي فقط</option>
                     </select>
                 </div>
                 <div class="double-field">
                     <div class="field-group">
-                        <label>عدد الكلمات التقريبي <span class="req">*</span></label>
+                        <label>عدد الكلمات <span class="req">*</span></label>
                         <input type="number" placeholder="أدخل عدد الكلمات..." required min="100">
                     </div>
                     <div class="field-group">
-                        <label>عدد الصفحات التقريبي</label>
-                        <input type="number" placeholder="عدد الصفحات..." min="1">
+                        <label>التخصص العلمي <span class="req">*</span></label>
+                        <select required id="translationSpecialization">
+                            <option value="">اختر التخصص...</option>
+                        </select>
                     </div>
-                </div>
-                <div class="field-group">
-                    <label>التخصص العلمي <span class="req">*</span></label>
-                    <select required id="translationSpecialization">
-                        <option value="">اختر التخصص...</option>
-                    </select>
                 </div>
             </div>
             <div class="form-section-card">
-                <h4><span class="step-badge">3</span> الملفات والمتطلبات</h4>
+                <h4><span class="step-badge">3</span> ملفات ومتطلبات</h4>
                 <div class="field-group">
                     <label>المدة المطلوبة</label>
                     <select>
                         <option value="urgent_3">عاجل جداً (3 أيام)</option>
-                        <option value="urgent_5">عاجل (5 أيام)</option>
                         <option value="urgent_7">سريع (7 أيام)</option>
                         <option value="normal_14" selected>عادي (14 يوم)</option>
-                        <option value="relaxed_21">مرن (21 يوم)</option>
-                        <option value="relaxed_30">مرن جداً (30 يوم)</option>
+                        <option value="relaxed_30">مرن (30 يوم)</option>
                     </select>
-                </div>
-                <div class="field-group">
-                    <label>ملاحظات إضافية</label>
-                    <textarea rows="3" placeholder="أي ملاحظات خاصة بالترجمة، مصطلحات محددة، تفضيلات..."></textarea>
                 </div>
                 <div class="file-upload-box" id="translationFileUpload">
                     <i class="fa-solid fa-cloud-arrow-up"></i>
@@ -188,16 +185,18 @@ function injectTranslationForm() {
         </form>
     `;
 
-    // تهيئة التخصصات
-    const transSpec = document.getElementById('translationSpecialization');
-    if (transSpec) {
-        Object.entries(specializationsTree).forEach(([key, spec]) => {
-            const og = document.createElement('optgroup');
-            og.label = spec.name;
-            spec.branches.forEach(b => og.innerHTML += `<option value="${b}">${b}</option>`);
-            transSpec.appendChild(og);
-        });
-    }
+    // ملء التخصصات
+    setTimeout(() => {
+        const transSpec = document.getElementById('translationSpecialization');
+        if (transSpec && typeof specializationsTree !== 'undefined') {
+            Object.entries(specializationsTree).forEach(([key, spec]) => {
+                const og = document.createElement('optgroup');
+                og.label = spec.name;
+                spec.branches.forEach(b => og.innerHTML += `<option value="${b}">${b}</option>`);
+                transSpec.appendChild(og);
+            });
+        }
+    }, 100);
 
     const fileBox = document.getElementById('translationFileUpload');
     if (fileBox) initFileUploadBox(fileBox);
@@ -209,12 +208,14 @@ function injectTranslationForm() {
             handleServiceFormSubmit(form, 'خدمة الترجمة الأكاديمية');
         });
     }
+    console.log('✅ Translation form injected');
 }
 
 // ═══════════════════════════════════════════
 //  4. خدمة التحليل الإحصائي
 // ═══════════════════════════════════════════
 function injectStatisticsForm() {
+    console.log('🔄 injectStatisticsForm running...');
     const page = document.getElementById('page-service-statistics');
     if (!page) return;
 
@@ -225,20 +226,20 @@ function injectStatisticsForm() {
                 <div class="service-page-title">
                     <i class="fa-solid fa-chart-pie"></i>
                     <h2>خدمات التحليل الإحصائي</h2>
-                    <p>تحليل احترافي للبيانات باستخدام SPSS, R, Python, AMOS</p>
+                    <p>تحليل احترافي باستخدام SPSS, R, Python, AMOS</p>
                 </div>
             </div>
         </div>
         <form class="service-specific-form" id="statisticsForm">
             <div class="form-section-card">
-                <h4><span class="step-badge">1</span> معلومات الدراسة</h4>
+                <h4><span class="step-badge">1</span> معلومات البيانات</h4>
                 <div class="field-group">
                     <label>نوع الدراسة <span class="req">*</span></label>
                     <select required>
-                        <option value="">اختر نوع الدراسة...</option>
-                        <option value="quantitative">دراسة كمية (استبيان / بيانات رقمية)</option>
-                        <option value="qualitative">دراسة نوعية (مقابلات / تحليل محتوى)</option>
-                        <option value="mixed">دراسة مختلطة (كمي + نوعي)</option>
+                        <option value="">اختر...</option>
+                        <option value="quantitative">دراسة كمية (استبيان / أرقام)</option>
+                        <option value="qualitative">دراسة نوعية (مقابلات / نصوص)</option>
+                        <option value="mixed">دراسة مختلطة</option>
                     </select>
                 </div>
                 <div class="double-field">
@@ -247,65 +248,43 @@ function injectStatisticsForm() {
                         <input type="number" placeholder="عدد المشاركين" required min="10">
                     </div>
                     <div class="field-group">
-                        <label>عدد المتغيرات</label>
-                        <input type="number" placeholder="عدد المتغيرات في الدراسة" min="1">
+                        <label>البرنامج المفضل</label>
+                        <select>
+                            <option value="">أريد توصيتكم</option>
+                            <option value="spss">SPSS</option>
+                            <option value="r">R</option>
+                            <option value="python">Python</option>
+                            <option value="amos">AMOS</option>
+                            <option value="smartpls">SmartPLS</option>
+                            <option value="nvivo">NVivo</option>
+                        </select>
                     </div>
-                </div>
-                <div class="field-group">
-                    <label>البرنامج الإحصائي المفضل</label>
-                    <select>
-                        <option value="">غير محدد - أريد توصيتكم</option>
-                        <option value="spss">SPSS</option>
-                        <option value="r">R Programming</option>
-                        <option value="python">Python</option>
-                        <option value="stata">STATA</option>
-                        <option value="amos">AMOS</option>
-                        <option value="smartpls">SmartPLS</option>
-                        <option value="nvivo">NVivo (للبيانات النوعية)</option>
-                    </select>
                 </div>
             </div>
             <div class="form-section-card">
                 <h4><span class="step-badge">2</span> التحليلات المطلوبة</h4>
                 <div class="checkbox-services">
-                    <label class="check-service"><input type="checkbox" checked> الإحصاء الوصفي (متوسطات، انحرافات، تكرارات)</label>
-                    <label class="check-service"><input type="checkbox"> اختبار T (T-Test)</label>
-                    <label class="check-service"><input type="checkbox"> تحليل التباين (ANOVA)</label>
-                    <label class="check-service"><input type="checkbox"> اختبار Chi-Square</label>
-                    <label class="check-service"><input type="checkbox"> تحليل الارتباط (Correlation)</label>
-                    <label class="check-service"><input type="checkbox"> تحليل الانحدار (Regression)</label>
-                    <label class="check-service"><input type="checkbox"> التحليل العاملي (Factor Analysis)</label>
-                    <label class="check-service"><input type="checkbox"> نمذجة المعادلات الهيكلية (SEM)</label>
-                    <label class="check-service"><input type="checkbox"> تحليل المسار (Path Analysis)</label>
-                    <label class="check-service"><input type="checkbox"> تحليل الثبات (Cronbach's Alpha)</label>
-                    <label class="check-service"><input type="checkbox"> تحليل الوساطة والاعتدال (Mediation & Moderation)</label>
+                    <label class="check-service"><input type="checkbox" checked> الإحصاء الوصفي</label>
+                    <label class="check-service"><input type="checkbox"> اختبار T-Test</label>
+                    <label class="check-service"><input type="checkbox"> تحليل التباين ANOVA</label>
+                    <label class="check-service"><input type="checkbox"> Chi-Square</label>
+                    <label class="check-service"><input type="checkbox"> تحليل الارتباط</label>
+                    <label class="check-service"><input type="checkbox"> تحليل الانحدار</label>
+                    <label class="check-service"><input type="checkbox"> التحليل العاملي</label>
+                    <label class="check-service"><input type="checkbox"> نمذجة SEM</label>
                 </div>
             </div>
             <div class="form-section-card">
-                <h4><span class="step-badge">3</span> ملفات ومتطلبات</h4>
-                <div class="field-group">
-                    <label>فرضيات الدراسة (إن وجدت)</label>
-                    <textarea rows="3" placeholder="اذكر فرضيات دراستك إن وجدت..."></textarea>
-                </div>
-                <div class="field-group">
-                    <label>نظام التوثيق</label>
-                    <select>
-                        <option>APA 7th Edition</option>
-                        <option>Harvard</option>
-                        <option>Vancouver</option>
-                        <option>Chicago</option>
-                        <option>IEEE</option>
-                    </select>
-                </div>
+                <h4><span class="step-badge">3</span> ملفات</h4>
                 <div class="file-upload-box" id="statisticsFileUpload">
                     <i class="fa-solid fa-cloud-arrow-up"></i>
-                    <p>ارفع ملف البيانات والاستبيان</p>
-                    <span>Excel, CSV, SPSS (.sav), PDF</span>
-                    <input type="file" multiple accept=".xlsx,.csv,.sav,.xls,.pdf" hidden>
+                    <p>ارفع ملف البيانات</p>
+                    <span>Excel, CSV, SPSS (.sav)</span>
+                    <input type="file" multiple accept=".xlsx,.csv,.sav" hidden>
                 </div>
             </div>
             <button type="submit" class="submit-service-btn">
-                <i class="fa-solid fa-paper-plane"></i> تقديم طلب التحليل الإحصائي
+                <i class="fa-solid fa-paper-plane"></i> تقديم طلب التحليل
             </button>
         </form>
     `;
@@ -320,12 +299,14 @@ function injectStatisticsForm() {
             handleServiceFormSubmit(form, 'خدمة التحليل الإحصائي');
         });
     }
+    console.log('✅ Statistics form injected');
 }
 
 // ═══════════════════════════════════════════
 //  5. خدمة فحص الاقتباس
 // ═══════════════════════════════════════════
 function injectPlagiarismForm() {
+    console.log('🔄 injectPlagiarismForm running...');
     const page = document.getElementById('page-service-plagiarism');
     if (!page) return;
 
@@ -336,7 +317,7 @@ function injectPlagiarismForm() {
                 <div class="service-page-title">
                     <i class="fa-solid fa-check-double"></i>
                     <h2>خدمات فحص الاقتباس</h2>
-                    <p>فحص دقيق لنسبة الاقتباس باستخدام Turnitin و iThenticate</p>
+                    <p>فحص دقيق باستخدام Turnitin و iThenticate</p>
                 </div>
             </div>
         </div>
@@ -344,70 +325,58 @@ function injectPlagiarismForm() {
             <div class="form-section-card">
                 <h4><span class="step-badge">1</span> نوع الفحص</h4>
                 <div class="field-group">
-                    <label>أداة الفحص المطلوبة <span class="req">*</span></label>
+                    <label>أداة الفحص <span class="req">*</span></label>
                     <select required>
-                        <option value="">اختر أداة الفحص...</option>
-                        <option value="turnitin">Turnitin (للرسائل الجامعية)</option>
-                        <option value="ithenticate">iThenticate (للأبحاث العلمية)</option>
-                        <option value="both">الفحص بكلا الأداتين</option>
-                        <option value="recommend">أريد توصيتكم بالأداة المناسبة</option>
+                        <option value="">اختر...</option>
+                        <option value="turnitin">Turnitin (للرسائل)</option>
+                        <option value="ithenticate">iThenticate (للأبحاث)</option>
+                        <option value="both">كلا الأداتين</option>
                     </select>
                 </div>
                 <div class="field-group">
-                    <label>نوع المحتوى المراد فحصه <span class="req">*</span></label>
+                    <label>نوع المحتوى <span class="req">*</span></label>
                     <select required>
-                        <option value="">اختر نوع المحتوى...</option>
+                        <option value="">اختر...</option>
                         <option value="thesis">رسالة ماجستير / دكتوراه</option>
-                        <option value="paper">ورقة علمية للنشر</option>
+                        <option value="paper">ورقة علمية</option>
                         <option value="proposal">خطة بحث</option>
                         <option value="chapter">فصل محدد</option>
-                        <option value="article">مقال أكاديمي</option>
                     </select>
                 </div>
             </div>
             <div class="form-section-card">
-                <h4><span class="step-badge">2</span> الخدمات المطلوبة</h4>
+                <h4><span class="step-badge">2</span> الخدمات</h4>
                 <div class="checkbox-services">
-                    <label class="check-service"><input type="checkbox" checked> فحص نسبة الاقتباس</label>
-                    <label class="check-service"><input type="checkbox"> إعادة صياغة أكاديمية لتقليل النسبة</label>
-                    <label class="check-service"><input type="checkbox"> تدقيق الاستشهادات المرجعية</label>
-                    <label class="check-service"><input type="checkbox"> تنسيق المراجع حسب النظام المطلوب</label>
-                    <label class="check-service"><input type="checkbox"> تقرير مفصل بنتائج الفحص</label>
+                    <label class="check-service"><input type="checkbox" checked> فحص الاقتباس</label>
+                    <label class="check-service"><input type="checkbox"> إعادة صياغة أكاديمية</label>
+                    <label class="check-service"><input type="checkbox"> تدقيق المراجع</label>
+                    <label class="check-service"><input type="checkbox"> تنسيق المراجع</label>
                 </div>
-                <div class="double-field" style="margin-top: 14px;">
+                <div class="double-field" style="margin-top:14px;">
                     <div class="field-group">
-                        <label>نظام التوثيق المعتمد</label>
+                        <label>نظام التوثيق</label>
                         <select>
-                            <option>APA 7th Edition</option>
+                            <option>APA 7th</option>
                             <option>Harvard</option>
                             <option>Vancouver</option>
-                            <option>Chicago</option>
-                            <option>IEEE</option>
-                            <option>MLA</option>
                         </select>
                     </div>
                     <div class="field-group">
-                        <label>النسبة المستهدفة للاقتباس</label>
+                        <label>النسبة المستهدفة</label>
                         <select>
                             <option value="below_5">أقل من 5%</option>
                             <option value="below_10">أقل من 10%</option>
-                            <option value="below_15">أقل من 15%</option>
                             <option value="below_20" selected>أقل من 20%</option>
-                            <option value="below_25">أقل من 25%</option>
                         </select>
                     </div>
                 </div>
             </div>
             <div class="form-section-card">
                 <h4><span class="step-badge">3</span> رفع الملف</h4>
-                <div class="field-group">
-                    <label>عدد الكلمات التقريبي</label>
-                    <input type="number" placeholder="عدد الكلمات..." min="500">
-                </div>
                 <div class="file-upload-box" id="plagiarismFileUpload">
                     <i class="fa-solid fa-cloud-arrow-up"></i>
                     <p>ارفع الملف المراد فحصه</p>
-                    <span>PDF, Word - الحد الأقصى 30MB</span>
+                    <span>PDF, Word - 30MB</span>
                     <input type="file" accept=".pdf,.docx,.doc" hidden>
                 </div>
             </div>
@@ -427,12 +396,14 @@ function injectPlagiarismForm() {
             handleServiceFormSubmit(form, 'خدمة فحص الاقتباس');
         });
     }
+    console.log('✅ Plagiarism form injected');
 }
 
 // ═══════════════════════════════════════════
 //  6. خدمة مشاريع التخرج
 // ═══════════════════════════════════════════
 function injectGraduationForm() {
+    console.log('🔄 injectGraduationForm running...');
     const page = document.getElementById('page-service-graduation');
     if (!page) return;
 
@@ -454,10 +425,9 @@ function injectGraduationForm() {
                     <div class="field-group">
                         <label>المرحلة الدراسية <span class="req">*</span></label>
                         <select required>
-                            <option value="">اختر المرحلة...</option>
+                            <option value="">اختر...</option>
                             <option value="diploma">دبلوم</option>
                             <option value="bachelor">بكالوريوس</option>
-                            <option value="higher-diploma">دبلوم عالي</option>
                         </select>
                     </div>
                     <div class="field-group">
@@ -470,13 +440,11 @@ function injectGraduationForm() {
                 <div class="field-group">
                     <label>نوع المشروع <span class="req">*</span></label>
                     <select required>
-                        <option value="">اختر نوع المشروع...</option>
+                        <option value="">اختر...</option>
                         <option value="research">مشروع بحثي</option>
-                        <option value="software">مشروع برمجي / تطبيق</option>
-                        <option value="design">مشروع تصميم / معماري</option>
-                        <option value="experiment">مشروع تجريبي / معملي</option>
-                        <option value="survey">مشروع مسحي / استبيان</option>
-                        <option value="business_plan">خطة عمل / دراسة جدوى</option>
+                        <option value="software">مشروع برمجي</option>
+                        <option value="design">مشروع تصميم</option>
+                        <option value="experiment">مشروع تجريبي</option>
                     </select>
                 </div>
             </div>
@@ -485,43 +453,26 @@ function injectGraduationForm() {
                 <div class="field-group">
                     <label>في أي مرحلة أنت؟ <span class="req">*</span></label>
                     <select required>
-                        <option value="">اختر المرحلة الحالية...</option>
-                        <option value="idea">لم أختر الفكرة بعد - أحتاج اقتراح أفكار</option>
-                        <option value="proposal">أحتاج كتابة خطة المشروع</option>
-                        <option value="implementation">أحتاج مساعدة في تنفيذ المشروع</option>
-                        <option value="report">لدي مشروع منفذ وأحتاج كتابة التقرير</option>
-                        <option value="full">أحتاج مساعدة كاملة من الفكرة حتى التقرير</option>
+                        <option value="">اختر...</option>
+                        <option value="idea">لم أختر الفكرة بعد</option>
+                        <option value="proposal">أحتاج خطة المشروع</option>
+                        <option value="implementation">أحتاج تنفيذ المشروع</option>
+                        <option value="report">أحتاج كتابة التقرير</option>
+                        <option value="full">مساعدة كاملة</option>
                     </select>
                 </div>
                 <div class="field-group">
-                    <label>فكرة المشروع (إن وجدت)</label>
-                    <textarea rows="3" placeholder="صف فكرة مشروعك باختصار..."></textarea>
+                    <label>فكرة المشروع</label>
+                    <textarea rows="3" placeholder="صف فكرة مشروعك..."></textarea>
                 </div>
             </div>
             <div class="form-section-card">
-                <h4><span class="step-badge">3</span> متطلبات إضافية</h4>
-                <div class="double-field">
-                    <div class="field-group">
-                        <label>لغة التقرير</label>
-                        <select>
-                            <option value="arabic">العربية</option>
-                            <option value="english">الإنجليزية</option>
-                        </select>
-                    </div>
-                    <div class="field-group">
-                        <label>موعد التسليم النهائي</label>
-                        <input type="date">
-                    </div>
-                </div>
-                <div class="field-group">
-                    <label>متطلبات خاصة من الجامعة</label>
-                    <textarea rows="2" placeholder="أي متطلبات خاصة أو نموذج محدد من جامعتك..."></textarea>
-                </div>
+                <h4><span class="step-badge">3</span> ملفات</h4>
                 <div class="file-upload-box" id="graduationFileUpload">
                     <i class="fa-solid fa-cloud-arrow-up"></i>
-                    <p>ارفع أي ملفات متعلقة بالمشروع</p>
-                    <span>متطلبات الجامعة، كود، تصميمات، مراجع...</span>
-                    <input type="file" multiple accept=".pdf,.docx,.doc,.pptx,.zip,.rar" hidden>
+                    <p>ارفع الملفات المتعلقة</p>
+                    <span>متطلبات الجامعة، كود، صور...</span>
+                    <input type="file" multiple hidden>
                 </div>
             </div>
             <button type="submit" class="submit-service-btn">
@@ -530,16 +481,17 @@ function injectGraduationForm() {
         </form>
     `;
 
-    // ملء التخصصات
-    const specSelect = document.getElementById('graduationSpecialization');
-    if (specSelect) {
-        Object.entries(specializationsTree).forEach(([key, spec]) => {
-            const og = document.createElement('optgroup');
-            og.label = spec.name;
-            spec.branches.forEach(b => og.innerHTML += `<option value="${b}">${b}</option>`);
-            specSelect.appendChild(og);
-        });
-    }
+    setTimeout(() => {
+        const specSelect = document.getElementById('graduationSpecialization');
+        if (specSelect && typeof specializationsTree !== 'undefined') {
+            Object.entries(specializationsTree).forEach(([key, spec]) => {
+                const og = document.createElement('optgroup');
+                og.label = spec.name;
+                spec.branches.forEach(b => og.innerHTML += `<option value="${b}">${b}</option>`);
+                specSelect.appendChild(og);
+            });
+        }
+    }, 100);
 
     const fileBox = document.getElementById('graduationFileUpload');
     if (fileBox) initFileUploadBox(fileBox);
@@ -551,13 +503,13 @@ function injectGraduationForm() {
             handleServiceFormSubmit(form, 'خدمة مشاريع التخرج');
         });
     }
+    console.log('✅ Graduation form injected');
 }
 
 // ═══════════════════════════════════════════
-//  وظائف مساعدة مشتركة
+//  وظائف مساعدة
 // ═══════════════════════════════════════════
 
-// ── رفع الملفات ──
 function initFileUploadBox(boxElement) {
     const fileInput = boxElement.querySelector('input[type="file"]');
     if (!fileInput) return;
@@ -629,9 +581,10 @@ function formatFileSize(bytes) {
     return (bytes / 1048576).toFixed(1) + ' MB';
 }
 
-// ── تقديم النموذج ──
 function handleServiceFormSubmit(form, serviceName) {
-    // إرسال النموذج للإيميل
+    console.log('📤 Submitting form:', serviceName);
+    
+    // إرسال للإيميل
     if (typeof sendFormToEmail === 'function') {
         sendFormToEmail(form, serviceName);
     }
@@ -644,7 +597,6 @@ function handleServiceFormSubmit(form, serviceName) {
     submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جارٍ إرسال الطلب...';
 
     setTimeout(() => {
-        // إعادة تعيين النموذج
         form.reset();
         form.querySelectorAll('.uploaded-files-list').forEach(el => el.remove());
         form.querySelectorAll('.file-upload-box').forEach(box => box.classList.remove('has-files'));
@@ -652,25 +604,26 @@ function handleServiceFormSubmit(form, serviceName) {
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalText;
 
-        // إضافة إشعار للمستخدم
+        // إضافة إشعار
         if (typeof addNotification === 'function') {
             addNotification('success', `تم تقديم طلب "${serviceName}" بنجاح!`, 'fa-circle-check', '#10B981');
         }
 
-        // تحديث الطلبات
-        if (typeof loadOrders === 'function') {
-            setTimeout(() => loadOrders(), 500);
-        }
-        if (typeof loadDashboardContent === 'function') {
-            setTimeout(() => loadDashboardContent(), 500);
-        }
+        // تحديث الواجهة
+        if (typeof loadOrders === 'function') setTimeout(() => loadOrders(), 500);
+        if (typeof loadDashboardContent === 'function') setTimeout(() => loadDashboardContent(), 500);
 
-        // التحويل لصفحة الطلبات
+        // تحويل للطلبات
         setTimeout(() => {
-            if (typeof navigateTo === 'function') {
-                navigateTo('myOrders');
-            }
+            if (typeof navigateTo === 'function') navigateTo('myOrders');
         }, 1500);
 
     }, 1500);
-    }
+}
+
+// تصدير الدوال للوصول الشامل
+window.injectTranslationForm = injectTranslationForm;
+window.injectStatisticsForm = injectStatisticsForm;
+window.injectPlagiarismForm = injectPlagiarismForm;
+window.injectGraduationForm = injectGraduationForm;
+window.initAllServiceForms = initAllServiceForms;
