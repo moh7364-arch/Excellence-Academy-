@@ -18,6 +18,35 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/services.css">
+    
+    <style>
+        /* إصلاح سريع للصفحات الفارغة */
+        .page-content { display: none !important; }
+        .page-content.active { display: block !important; }
+        
+        /* تنسيق رسالة الصفحة الفارغة */
+        .empty-page-message {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+        }
+        .empty-page-message i {
+            font-size: 4rem;
+            color: var(--gray-300);
+            display: block;
+            margin-bottom: 16px;
+        }
+        .empty-page-message h4 {
+            color: var(--gray-600);
+            margin-bottom: 8px;
+        }
+        .empty-page-message p {
+            color: var(--gray-400);
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
     
@@ -54,11 +83,11 @@
 
             <div class="sidebar-profile" id="sidebarProfile">
                 <div class="profile-avatar" id="profileAvatar">
-                    <span id="profileInitials">أح</span>
+                    <span id="profileInitials">ب</span>
                 </div>
                 <div class="profile-info">
-                    <span class="profile-name" id="profileName">أحمد محمد</span>
-                    <span class="profile-role" id="profileRole">طالب دكتوراه</span>
+                    <span class="profile-name" id="profileName">باحث جديد</span>
+                    <span class="profile-role" id="profileRole">باحث</span>
                 </div>
             </div>
 
@@ -71,12 +100,12 @@
                 <a href="#myOrders" class="nav-link" data-page="myOrders">
                     <i class="fa-solid fa-list-check"></i>
                     <span>طلباتي</span>
-                    <span class="nav-badge" id="ordersBadge">3</span>
+                    <span class="nav-badge" id="ordersBadge" style="display:none;">0</span>
                 </a>
                 <a href="#messages" class="nav-link" data-page="messages">
                     <i class="fa-solid fa-comments"></i>
                     <span>المراسلات</span>
-                    <span class="nav-badge nav-badge-red" id="messagesBadge">5</span>
+                    <span class="nav-badge nav-badge-red" id="messagesBadge" style="display:none;">0</span>
                 </a>
 
                 <div class="nav-section-label">الخدمات</div>
@@ -118,6 +147,12 @@
                     <i class="fa-solid fa-users"></i>
                     <span>المجتمع الأكاديمي</span>
                 </a>
+                
+                <div class="nav-section-label">تواصل</div>
+                <a href="https://chat.whatsapp.com/DO6CyC5MwajLizwHNkmLHU?mode=gi_t" target="_blank" class="nav-link" style="color: #25D366;">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>تواصل معنا</span>
+                </a>
             </nav>
 
             <div class="sidebar-footer">
@@ -146,49 +181,26 @@
             </div>
 
             <div class="topbar-center">
-                <!-- شعار متحرك ترحيبي -->
                 <div class="welcome-banner">
                     <div class="banner-scroll">
-                        <span class="banner-item">
-                            <i class="fa-solid fa-shield-halved"></i> ثقة
-                        </span>
+                        <span class="banner-item"><i class="fa-solid fa-shield-halved"></i> ثقة</span>
                         <span class="banner-separator">✦</span>
-                        <span class="banner-item">
-                            <i class="fa-solid fa-handshake"></i> أمانة
-                        </span>
+                        <span class="banner-item"><i class="fa-solid fa-handshake"></i> أمانة</span>
                         <span class="banner-separator">✦</span>
-                        <span class="banner-item">
-                            <i class="fa-solid fa-lock"></i> سرية
-                        </span>
+                        <span class="banner-item"><i class="fa-solid fa-lock"></i> سرية</span>
                         <span class="banner-separator">✦</span>
-                        <span class="banner-item">
-                            <i class="fa-solid fa-rocket"></i> إنجاز
-                        </span>
+                        <span class="banner-item"><i class="fa-solid fa-rocket"></i> إنجاز</span>
                         <span class="banner-separator">✦</span>
-                        <span class="banner-item">
-                            <i class="fa-solid fa-bullseye"></i> دقة
-                        </span>
+                        <span class="banner-item"><i class="fa-solid fa-bullseye"></i> دقة</span>
                         <span class="banner-separator">✦</span>
-                        <span class="banner-item">
-                            <i class="fa-solid fa-star"></i> جودة
-                        </span>
+                        <span class="banner-item"><i class="fa-solid fa-star"></i> جودة</span>
                         <span class="banner-separator">✦</span>
-                        <span class="banner-item">
-                            <i class="fa-solid fa-clock"></i> التزام
-                        </span>
+                        <span class="banner-item"><i class="fa-solid fa-medal"></i> خبرة</span>
+                        <!-- تكرار -->
                         <span class="banner-separator">✦</span>
-                        <span class="banner-item">
-                            <i class="fa-solid fa-medal"></i> خبرة
-                        </span>
-                        <!-- تكرار للحركة المستمرة -->
+                        <span class="banner-item"><i class="fa-solid fa-shield-halved"></i> ثقة</span>
                         <span class="banner-separator">✦</span>
-                        <span class="banner-item">
-                            <i class="fa-solid fa-shield-halved"></i> ثقة
-                        </span>
-                        <span class="banner-separator">✦</span>
-                        <span class="banner-item">
-                            <i class="fa-solid fa-handshake"></i> أمانة
-                        </span>
+                        <span class="banner-item"><i class="fa-solid fa-handshake"></i> أمانة</span>
                     </div>
                 </div>
             </div>
@@ -200,40 +212,23 @@
                 </div>
                 <div class="notification-bell" id="notificationBell">
                     <i class="fa-solid fa-bell"></i>
-                    <span class="bell-dot"></span>
+                    <span class="bell-dot" style="display:none;"></span>
                     <div class="notification-dropdown" id="notificationDropdown">
                         <div class="notif-head">
                             <h4>الإشعارات</h4>
-                            <span>3 جديدة</span>
+                            <span>لا جديد</span>
                         </div>
                         <div class="notif-list">
-                            <div class="notif-item unread">
-                                <i class="fa-solid fa-circle-check" style="color:#10B981;"></i>
-                                <div>
-                                    <p>تم تسليم طلبك #1245 بنجاح</p>
-                                    <span>منذ 10 دقائق</span>
-                                </div>
-                            </div>
-                            <div class="notif-item unread">
-                                <i class="fa-solid fa-message" style="color:#3B82F6;"></i>
-                                <div>
-                                    <p>رسالة جديدة من د. سارة الأحمدي</p>
-                                    <span>منذ ساعة</span>
-                                </div>
-                            </div>
-                            <div class="notif-item">
-                                <i class="fa-solid fa-clock" style="color:#F59E0B;"></i>
-                                <div>
-                                    <p>طلبك #1243 قيد المراجعة</p>
-                                    <span>منذ 3 ساعات</span>
-                                </div>
+                            <div style="text-align: center; padding: 30px; color: var(--gray-400);">
+                                <i class="fa-solid fa-bell-slash" style="font-size: 2rem; display: block; margin-bottom: 10px;"></i>
+                                <p>لا توجد إشعارات حالياً</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="user-menu-top" id="userMenuTop">
                     <div class="user-avatar-sm" id="userAvatarSm">
-                        <span>أح</span>
+                        <span>ب</span>
                     </div>
                 </div>
             </div>
@@ -244,37 +239,32 @@
             
             <!-- ══════════ الصفحة الرئيسية ══════════ -->
             <div class="page-content active" id="page-home">
-                
-                <!-- قسم الترحيب -->
                 <div class="welcome-hero" data-aos="fade-up">
                     <div class="hero-text">
-                        <h2>أهلاً بك، <span id="userGreeting">أحمد</span> 👋</h2>
+                        <h2>أهلاً بك، <span id="userGreeting">باحث</span> 👋</h2>
                         <p>كيف يمكننا مساعدتك اليوم في رحلتك الأكاديمية؟</p>
                     </div>
                     <div class="hero-stats">
                         <div class="hero-stat">
-                            <span class="hs-num">12</span>
+                            <span class="hs-num" id="completedCount">0</span>
                             <span>مشروع مكتمل</span>
                         </div>
                         <div class="hero-stat">
-                            <span class="hs-num">3</span>
+                            <span class="hs-num" id="activeCount">0</span>
                             <span>قيد التنفيذ</span>
                         </div>
                         <div class="hero-stat">
-                            <span class="hs-num">4.8</span>
+                            <span class="hs-num">-</span>
                             <span>تقييمك</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- بطاقات الخدمات الرئيسية مع صور -->
+                <!-- بطاقات الخدمات -->
                 <div class="services-showcase">
-                    <h3 class="section-title" data-aos="fade-up">
-                        <i class="fa-solid fa-layer-group"></i> خدماتنا المتكاملة
-                    </h3>
+                    <h3 class="section-title"><i class="fa-solid fa-layer-group"></i> خدماتنا المتكاملة</h3>
                     <div class="services-grid">
-                        <!-- خدمة الرسائل الجامعية -->
-                        <div class="service-showcase-card" data-aos="fade-up" data-aos-delay="100" onclick="navigateTo('service-thesis')">
+                        <div class="service-showcase-card" onclick="navigateTo('service-thesis')">
                             <div class="ssc-image">
                                 <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=600&q=80" alt="الرسائل الجامعية" loading="lazy">
                                 <div class="ssc-overlay"></div>
@@ -282,13 +272,10 @@
                             </div>
                             <div class="ssc-content">
                                 <i class="fa-solid fa-file-pen"></i>
-                                <h4>الرسائل الجامعية</h4>
-                                <p>مساعدة أكاديمية في كتابة رسائل الماجستير والدكتوراه</p>
+                                <div><h4>الرسائل الجامعية</h4><p>مساعدة في رسائل الماجستير والدكتوراه</p></div>
                             </div>
                         </div>
-
-                        <!-- خدمة النشر العلمي -->
-                        <div class="service-showcase-card" data-aos="fade-up" data-aos-delay="200" onclick="navigateTo('service-publication')">
+                        <div class="service-showcase-card" onclick="navigateTo('service-publication')">
                             <div class="ssc-image">
                                 <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=600&q=80" alt="النشر العلمي" loading="lazy">
                                 <div class="ssc-overlay"></div>
@@ -296,39 +283,30 @@
                             </div>
                             <div class="ssc-content">
                                 <i class="fa-solid fa-newspaper"></i>
-                                <h4>النشر العلمي</h4>
-                                <p>نشر بحثك في مجلات Scopus و ISI المعتمدة</p>
+                                <div><h4>النشر العلمي</h4><p>نشر بحثك في مجلات Scopus و ISI</p></div>
                             </div>
                         </div>
-
-                        <!-- خدمة الترجمة -->
-                        <div class="service-showcase-card" data-aos="fade-up" data-aos-delay="300" onclick="navigateTo('service-translation')">
+                        <div class="service-showcase-card" onclick="navigateTo('service-translation')">
                             <div class="ssc-image">
-                                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80" alt="الترجمة الأكاديمية" loading="lazy">
+                                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80" alt="الترجمة" loading="lazy">
                                 <div class="ssc-overlay"></div>
                             </div>
                             <div class="ssc-content">
                                 <i class="fa-solid fa-language"></i>
-                                <h4>الترجمة الأكاديمية</h4>
-                                <p>ترجمة احترافية عربي-إنجليزي والعكس</p>
+                                <div><h4>الترجمة الأكاديمية</h4><p>ترجمة احترافية عربي-إنجليزي</p></div>
                             </div>
                         </div>
-
-                        <!-- خدمة التحليل الإحصائي -->
-                        <div class="service-showcase-card" data-aos="fade-up" data-aos-delay="400" onclick="navigateTo('service-statistics')">
+                        <div class="service-showcase-card" onclick="navigateTo('service-statistics')">
                             <div class="ssc-image">
                                 <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80" alt="التحليل الإحصائي" loading="lazy">
                                 <div class="ssc-overlay"></div>
                             </div>
                             <div class="ssc-content">
                                 <i class="fa-solid fa-chart-pie"></i>
-                                <h4>التحليل الإحصائي</h4>
-                                <p>SPSS, R, AMOS وجميع أدوات التحليل</p>
+                                <div><h4>التحليل الإحصائي</h4><p>SPSS, R, AMOS وجميع الأدوات</p></div>
                             </div>
                         </div>
-
-                        <!-- خدمة فحص الاقتباس -->
-                        <div class="service-showcase-card" data-aos="fade-up" data-aos-delay="500" onclick="navigateTo('service-plagiarism')">
+                        <div class="service-showcase-card" onclick="navigateTo('service-plagiarism')">
                             <div class="ssc-image">
                                 <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&q=80" alt="فحص الاقتباس" loading="lazy">
                                 <div class="ssc-overlay"></div>
@@ -336,116 +314,39 @@
                             </div>
                             <div class="ssc-content">
                                 <i class="fa-solid fa-check-double"></i>
-                                <h4>فحص الاقتباس</h4>
-                                <p>فحص نسبة الاقتباس وإعادة الصياغة الأكاديمية</p>
+                                <div><h4>فحص الاقتباس</h4><p>فحص نسبة الاقتباس وإعادة الصياغة</p></div>
                             </div>
                         </div>
-
-                        <!-- خدمة مشاريع التخرج -->
-                        <div class="service-showcase-card" data-aos="fade-up" data-aos-delay="600" onclick="navigateTo('service-graduation')">
+                        <div class="service-showcase-card" onclick="navigateTo('service-graduation')">
                             <div class="ssc-image">
                                 <img src="https://images.unsplash.com/photo-1523050854058-8df90910b683?w=600&q=80" alt="مشاريع التخرج" loading="lazy">
                                 <div class="ssc-overlay"></div>
                             </div>
                             <div class="ssc-content">
                                 <i class="fa-solid fa-graduation-cap"></i>
-                                <h4>مشاريع التخرج</h4>
-                                <p>مساعدة في مشاريع التخرج لجميع التخصصات</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- التخصصات المتاحة مع صور -->
-                <div class="specializations-section" data-aos="fade-up">
-                    <h3 class="section-title">
-                        <i class="fa-solid fa-microscope"></i> جميع التخصصات
-                    </h3>
-                    <div class="specializations-grid">
-                        <div class="spec-card">
-                            <div class="spec-img">
-                                <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&q=80" alt="الطب" loading="lazy">
-                            </div>
-                            <div class="spec-info">
-                                <i class="fa-solid fa-stethoscope"></i>
-                                <h4>الطب والعلوم الصحية</h4>
-                                <span>الطب البشري، الأسنان، الصيدلة، التمريض، الصحة العامة</span>
-                            </div>
-                        </div>
-                        <div class="spec-card">
-                            <div class="spec-img">
-                                <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=400&q=80" alt="الهندسة" loading="lazy">
-                            </div>
-                            <div class="spec-info">
-                                <i class="fa-solid fa-gears"></i>
-                                <h4>الهندسة</h4>
-                                <span>مدنية، كهربائية، ميكانيكية، برمجيات، ذكاء اصطناعي</span>
-                            </div>
-                        </div>
-                        <div class="spec-card">
-                            <div class="spec-img">
-                                <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&q=80" alt="العلوم" loading="lazy">
-                            </div>
-                            <div class="spec-info">
-                                <i class="fa-solid fa-flask"></i>
-                                <h4>العلوم الطبيعية</h4>
-                                <span>فيزياء، كيمياء، أحياء، رياضيات، إحصاء</span>
-                            </div>
-                        </div>
-                        <div class="spec-card">
-                            <div class="spec-img">
-                                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400&q=80" alt="العلوم الاجتماعية" loading="lazy">
-                            </div>
-                            <div class="spec-info">
-                                <i class="fa-solid fa-users-gear"></i>
-                                <h4>العلوم الاجتماعية</h4>
-                                <span>علم اجتماع، علم نفس، علوم سياسية، إعلام</span>
-                            </div>
-                        </div>
-                        <div class="spec-card">
-                            <div class="spec-img">
-                                <img src="https://images.unsplash.com/photo-1491841573634-28140fc7ced7?w=400&q=80" alt="العلوم الإنسانية" loading="lazy">
-                            </div>
-                            <div class="spec-info">
-                                <i class="fa-solid fa-book"></i>
-                                <h4>العلوم الإنسانية</h4>
-                                <span>تاريخ، فلسفة، أدب، لغويات، دراسات إسلامية</span>
-                            </div>
-                        </div>
-                        <div class="spec-card">
-                            <div class="spec-img">
-                                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&q=80" alt="الإدارة" loading="lazy">
-                            </div>
-                            <div class="spec-info">
-                                <i class="fa-solid fa-chart-line"></i>
-                                <h4>الإدارة والاقتصاد</h4>
-                                <span>إدارة أعمال، محاسبة، تسويق، تمويل، اقتصاد</span>
-                            </div>
-                        </div>
-                        <div class="spec-card">
-                            <div class="spec-img">
-                                <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=400&q=80" alt="القانون" loading="lazy">
-                            </div>
-                            <div class="spec-info">
-                                <i class="fa-solid fa-scale-balanced"></i>
-                                <h4>القانون والأنظمة</h4>
-                                <span>قانون عام، خاص، جنائي، تجاري، دولي</span>
+                                <div><h4>مشاريع التخرج</h4><p>مساعدة في مشاريع التخرج لجميع التخصصات</p></div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- الطلبات النشطة -->
-                <div class="active-orders-section" data-aos="fade-up">
+                <div class="active-orders-section">
                     <div class="section-header-bar">
                         <h3><i class="fa-solid fa-clock"></i> طلباتك النشطة</h3>
-                        <a href="#myOrders" class="view-all-link">عرض الكل <i class="fa-solid fa-arrow-left"></i></a>
+                        <a href="#myOrders" class="view-all-link" onclick="navigateTo('myOrders')">عرض الكل <i class="fa-solid fa-arrow-left"></i></a>
                     </div>
                     <div class="active-orders-cards" id="activeOrdersCards">
-                        <!-- تمتلئ بواسطة JavaScript -->
+                        <div class="empty-page-message">
+                            <i class="fa-solid fa-clipboard-list"></i>
+                            <h4>لا توجد طلبات نشطة</h4>
+                            <p>ابدأ رحلتك الأكاديمية معنا بطلب خدمتك الأولى</p>
+                            <button class="btn btn-primary" style="margin-top: 14px;" onclick="navigateTo('service-thesis')">
+                                <i class="fa-solid fa-plus"></i> طلب خدمة جديدة
+                            </button>
+                        </div>
                     </div>
                 </div>
-
             </div>
 
             <!-- ══════════ صفحة: خدمة الرسائل الجامعية ══════════ -->
@@ -460,7 +361,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- النموذج الخاص بالرسائل الجامعية -->
                 <form class="service-specific-form" id="thesisForm">
                     <div class="form-section-card">
                         <h4><span class="step-badge">1</span> معلومات أساسية</h4>
@@ -486,12 +386,11 @@
                             <input type="text" placeholder="اسم الجامعة (اختياري)">
                         </div>
                     </div>
-
                     <div class="form-section-card">
                         <h4><span class="step-badge">2</span> مرحلة البحث</h4>
                         <div class="field-group">
                             <label>في أي مرحلة أنت الآن؟ <span class="req">*</span></label>
-                            <select required id="thesisStage">
+                            <select required>
                                 <option value="">اختر المرحلة...</option>
                                 <option value="title">لم أحدد العنوان بعد - أحتاج مساعدة في اختيار الموضوع</option>
                                 <option value="proposal">أحتاج كتابة خطة البحث (Proposal)</option>
@@ -512,7 +411,6 @@
                             <input type="number" placeholder="مثال: 20000" min="1000">
                         </div>
                     </div>
-
                     <div class="form-section-card">
                         <h4><span class="step-badge">3</span> متطلبات إضافية</h4>
                         <div class="field-group">
@@ -538,12 +436,11 @@
                         </div>
                         <div class="file-upload-box" id="thesisFileUpload">
                             <i class="fa-solid fa-cloud-arrow-up"></i>
-                            <p>ارفع الملفات المساعدة (PDF, Word)</p>
-                            <span>يمكنك رفع خطة البحث أو أي مراجع</span>
+                            <p>ارفع الملفات المساعدة</p>
+                            <span>PDF, Word - يمكنك رفع خطة البحث أو مراجع</span>
                             <input type="file" multiple accept=".pdf,.docx,.doc" hidden>
                         </div>
                     </div>
-
                     <button type="submit" class="submit-service-btn">
                         <i class="fa-solid fa-paper-plane"></i> تقديم الطلب
                     </button>
@@ -560,48 +457,18 @@
                             <h2>خدمات النشر العلمي</h2>
                             <p>نشر بحثك في مجلات Scopus و ISI المعتمدة</p>
                         </div>
-                        <!-- شعارات المجلات وقواعد البيانات -->
-<div class="journals-logos" style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center; padding: 20px; background: var(--white); border-radius: var(--radius-lg); margin-bottom: 20px; box-shadow: var(--shadow-sm);">
-    <span style="font-weight: 700; color: var(--gray-600); margin-left: 10px;">معتمدون لدى:</span>
-    
-    <!-- Scopus -->
-    <div style="display: flex; align-items: center; gap: 8px; background: #FFF5F5; padding: 8px 16px; border-radius: 8px;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Scopus_logo.svg/320px-Scopus_logo.svg.png" 
-             alt="Scopus" style="height: 30px;" loading="lazy">
-    </div>
-    
-    <!-- Web of Science / Clarivate -->
-    <div style="display: flex; align-items: center; gap: 8px; background: #F0F4FF; padding: 8px 16px; border-radius: 8px;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Clarivate.svg/320px-Clarivate.svg.png" 
-             alt="Clarivate" style="height: 28px;" loading="lazy">
-    </div>
-    
-    <!-- PubMed -->
-    <div style="display: flex; align-items: center; gap: 8px; background: #F0FFF4; padding: 8px 16px; border-radius: 8px;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/US-NLM-PubMed-Logo.svg/320px-US-NLM-PubMed-Logo.svg.png" 
-             alt="PubMed" style="height: 28px;" loading="lazy">
-    </div>
-    
-    <!-- DOI -->
-    <div style="display: flex; align-items: center; gap: 8px; background: #FFF8F0; padding: 8px 16px; border-radius: 8px;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/DOI_logo.svg/320px-DOI_logo.svg.png" 
-             alt="DOI" style="height: 24px;" loading="lazy">
-    </div>
-    
-    <!-- Turnitin -->
-    <div style="display: flex; align-items: center; gap: 8px; background: #F5F0FF; padding: 8px 16px; border-radius: 8px;">
-        <img src="https://www.turnitin.com/img/turnitin-logo.svg" 
-             alt="Turnitin" style="height: 24px;" loading="lazy">
-    </div>
-    
-    <!-- ORCID -->
-    <div style="display: flex; align-items: center; gap: 8px; background: #F0FFFA; padding: 8px 16px; border-radius: 8px;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/ORCID_iD.svg/320px-ORCID_iD.svg.png" 
-             alt="ORCID" style="height: 24px;" loading="lazy">
-    </div>
-            </div>
                     </div>
                 </div>
+                
+                <!-- شعارات المجلات -->
+                <div class="journals-logos">
+                    <span style="font-weight:700;color:var(--gray-600);margin-left:10px;">معتمدون لدى:</span>
+                    <div><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Scopus_logo.svg/320px-Scopus_logo.svg.png" alt="Scopus" style="height:30px;" loading="lazy"></div>
+                    <div><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Clarivate.svg/320px-Clarivate.svg.png" alt="Clarivate" style="height:28px;" loading="lazy"></div>
+                    <div><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/US-NLM-PubMed-Logo.svg/320px-US-NLM-PubMed-Logo.svg.png" alt="PubMed" style="height:28px;" loading="lazy"></div>
+                    <div><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/DOI_logo.svg/320px-DOI_logo.svg.png" alt="DOI" style="height:24px;" loading="lazy"></div>
+                </div>
+
                 <form class="service-specific-form" id="publicationForm">
                     <div class="form-section-card">
                         <h4><span class="step-badge">1</span> حالة البحث</h4>
@@ -616,12 +483,11 @@
                             </select>
                         </div>
                     </div>
-
                     <div class="form-section-card">
                         <h4><span class="step-badge">2</span> تصنيف المجلة</h4>
                         <div class="field-group">
                             <label>ما تصنيف المجلة التي تستهدفها؟ <span class="req">*</span></label>
-                            <select required id="journalCategory">
+                            <select required>
                                 <option value="">اختر التصنيف...</option>
                                 <option value="Q1">Q1 - المجلات الأعلى تصنيفاً</option>
                                 <option value="Q2">Q2 - مجلات عالية التصنيف</option>
@@ -633,7 +499,7 @@
                         </div>
                         <div class="field-group">
                             <label>قاعدة البيانات المستهدفة</label>
-                            <select id="targetDatabase">
+                            <select>
                                 <option value="">اختر...</option>
                                 <option value="scopus">Scopus</option>
                                 <option value="isi">ISI / Web of Science</option>
@@ -646,7 +512,6 @@
                             <input type="text" placeholder="اكتب أسماء المجلات إن وجدت">
                         </div>
                     </div>
-
                     <div class="form-section-card">
                         <h4><span class="step-badge">3</span> الخدمات المطلوبة</h4>
                         <div class="checkbox-services">
@@ -658,16 +523,17 @@
                             <label class="check-service"><input type="checkbox"> إعادة التقديم في حال الرفض</label>
                         </div>
                     </div>
-
                     <button type="submit" class="submit-service-btn">
                         <i class="fa-solid fa-paper-plane"></i> تقديم الطلب
                     </button>
                 </form>
             </div>
 
-            <!-- ══════════ صفحات الخدمات الأخرى (سيتم تضمينها في services.css & services.js) ══════════ -->
-            <!-- service-translation, service-statistics, service-plagiarism, service-graduation -->
-            <!-- سيتم بناؤها ديناميكياً عبر JavaScript -->
+            <!-- ══════════ الصفحات المحقونة - ستتم تعبئتها بواسطة services.js ══════════ -->
+            <div class="page-content" id="page-service-translation"></div>
+            <div class="page-content" id="page-service-statistics"></div>
+            <div class="page-content" id="page-service-plagiarism"></div>
+            <div class="page-content" id="page-service-graduation"></div>
 
             <!-- ══════════ صفحة: طلباتي ══════════ -->
             <div class="page-content" id="page-myOrders">
@@ -733,7 +599,15 @@
         </div>
     </main>
 
-    <!-- ═══════════════ نافذة تقييم الخبراء ═══════════════ -->
+    <!-- ═══════════════ أيقونة واتساب عائمة ═══════════════ -->
+    <a href="https://chat.whatsapp.com/DO6CyC5MwajLizwHNkmLHU?mode=gi_t" 
+       target="_blank" 
+       class="whatsapp-float"
+       title="تواصل معنا عبر واتساب">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- ═══════════════ نافذة تقييم ═══════════════ -->
     <div class="modal-wrapper" id="ratingModalWrapper">
         <div class="modal-backdrop"></div>
         <div class="modal-dialog">
@@ -745,35 +619,50 @@
         </div>
     </div>
 
-    <!-- Scripts -->
+    <!-- Scripts - الترتيب مهم جداً -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="js/data.js"></script>
-    <script src="js/services.js"></script>
-    <script src="js/app.js"></script>
-        <!-- ═══════════════ أيقونة واتساب العائمة ═══════════════ -->
-    <a href="https://chat.whatsapp.com/DO6CyC5MwajLizwHNkmLHU?mode=gi_t" 
-       target="_blank" 
-       class="whatsapp-float"
-       title="تواصل معنا عبر واتساب">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
-
-    <!-- ═══════════════ زر التواصل السريع ═══════════════ -->
-    <div class="contact-float-buttons">
-        <a href="https://chat.whatsapp.com/DO6CyC5MwajLizwHNkmLHU?mode=gi_t" 
-           target="_blank" 
-           class="contact-float-btn whatsapp-btn"
-           title="انضم لمجموعة الواتساب">
-            <i class="fa-brands fa-whatsapp"></i>
-            <span>تواصل معنا</span>
-        </a>
-    </div>
-
-    <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="js/data.js"></script>
-    <script src="js/services.js"></script>
     <script src="js/email-service.js"></script>
+    <script src="js/services.js"></script>
     <script src="js/app.js"></script>
+    
+    <!-- تأكيد تحميل الخدمات -->
+    <script>
+        // تأكيد أن دوال الحقن تعمل
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ DOM Loaded - Checking service pages...');
+            
+            // التحقق من وجود دوال الحقن
+            if (typeof injectTranslationForm === 'function') {
+                console.log('✅ injectTranslationForm موجودة');
+                injectTranslationForm();
+            } else {
+                console.error('❌ injectTranslationForm غير موجودة');
+            }
+            
+            if (typeof injectStatisticsForm === 'function') {
+                console.log('✅ injectStatisticsForm موجودة');
+                injectStatisticsForm();
+            } else {
+                console.error('❌ injectStatisticsForm غير موجودة');
+            }
+            
+            if (typeof injectPlagiarismForm === 'function') {
+                console.log('✅ injectPlagiarismForm موجودة');
+                injectPlagiarismForm();
+            } else {
+                console.error('❌ injectPlagiarismForm غير موجودة');
+            }
+            
+            if (typeof injectGraduationForm === 'function') {
+                console.log('✅ injectGraduationForm موجودة');
+                injectGraduationForm();
+            } else {
+                console.error('❌ injectGraduationForm غير موجودة');
+            }
+            
+            console.log('✅ All service pages injected');
+        });
+    </script>
 </body>
-</html>
+    </html>
